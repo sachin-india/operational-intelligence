@@ -60,18 +60,18 @@ Important implementation details from docs:
 ## 2.4 Architecture illustration
 ```mermaid
 flowchart LR
-    A[Factory Systems\nMES, APC, FDC, EAP/SECS-GEM,\nMetrology, ERP, CMMS, QMS] --> B[Data Integration + Transforms\n(batch + stream)]
-    B --> C[Ontology Indexing\nObject Storage V2 + Funnel]
+    A[Factory Systems<br>sensors, MES, ERP,<br>maintenance, quality] --> B[Data Integration<br>batch + streaming pipelines]
+    B --> C[Ontology Indexing<br>converts data into<br>graph objects and links]
 
-    C --> D[Semantic Layer\nObjects, Properties, Links]
-    C --> E[Kinetic Layer\nActions, Functions, Rules]
-    C --> F[Security + Governance\nRow/column/object policies,\naudit, approvals]
+    subgraph ONT[Ontology — one unified layer]
+        D[Semantic<br>What exists and how<br>things relate]
+        E[Kinetic<br>What can be done —<br>actions, functions, rules]
+        F[Governance<br>Who can act, with what<br>approvals and audit trail]
+    end
 
-    D --> G[Operational Apps\nWorkshop, Object Explorer,\ncustom OSDK apps]
-    E --> G
-    F --> G
-
-    G --> H[External Writeback\nMES/ERP/CMMS APIs,\nwebhooks, notifications]
+    C --> ONT
+    ONT --> G[Operational Apps<br>operator dashboards,<br>alert consoles, decision tools]
+    G --> H[External Writeback<br>decisions written back to<br>MES, ERP, maintenance systems]
     H --> A
 ```
 
@@ -208,9 +208,9 @@ erDiagram
 ## 4.4 Rollout phases (recommended)
 ```mermaid
 flowchart LR
-    P1[Phase 1: Visibility\nRead-only graph + KPIs] --> P2[Phase 2: Decision Support\nRules/models + recommendations]
-    P2 --> P3[Phase 3: Controlled Action\nHuman-approved actions + writeback]
-    P3 --> P4[Phase 4: Selective Automation\nTight guardrails + auto-close loop]
+    P1[Phase 1: Visibility<br>Read-only graph + KPIs] --> P2[Phase 2: Decision Support<br>Rules/models + recommendations]
+    P2 --> P3[Phase 3: Controlled Action<br>Human-approved actions + writeback]
+    P3 --> P4[Phase 4: Selective Automation<br>Tight guardrails + auto-close loop]
 ```
 
 ## 5) Design Decisions That Matter Most
@@ -278,7 +278,7 @@ Success criterion: users should see why Track B improves speed and consistency o
 ## 9.2 Track comparison architecture
 ```mermaid
 flowchart TB
-    S[Shared Inputs\nSensors, jobs, workers,\nmaintenance, inventory, quality]
+    S[Shared Inputs<br>Sensors, jobs, workers,<br>maintenance, inventory, quality]
 
     subgraph A[Track A: Simple Knowledge Graph]
         A1[Ingest + Model Entities/Links]
@@ -291,7 +291,7 @@ flowchart TB
         B2[Derived context + risk scores]
         B3[Actions with permissions + validation]
         B4[Audit trail + decision trace]
-        B5[Writeback simulator\nMES/CMMS mock API]
+        B5[Writeback simulator<br>MES/CMMS mock API]
     end
 
     S --> A1 --> A2 --> A3

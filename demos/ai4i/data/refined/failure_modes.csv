@@ -1,0 +1,6 @@
+failure_id,failure_name
+TWF,Tool Wear Failure
+HDF,Heat Dissipation Failure
+PWF,Power Failure
+OSF,Overstrain Failure
+RNF,Random Failure

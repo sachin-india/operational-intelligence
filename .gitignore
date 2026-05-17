@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+env/
+
+# Distribution
+build/
+dist/
+*.egg
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Env (never commit secrets)
+.env
+.env.local
+
+# Docker persistent volumes
+infra/data/
+
+# Runtime-generated action output (demo side effect, not source)
+demos/*/data/mes_mock.jsonl
+
+# Jupyter executed output copies
+notebooks/*_executed.ipynb

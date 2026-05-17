@@ -1,0 +1,44 @@
+[project]
+name = "operational-intelligence"
+version = "0.1.0"
+description = "Learning project: operational context graphs (Palantir-style) on manufacturing data"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Sachin Kumar Singh", email = "sachin.arvind.singh@gmail.com" }
+]
+license = { text = "MIT" }
+dependencies = [
+    "fastapi>=0.136.1",
+    "neo4j>=5.0",
+    "pandas>=3.0.3",
+    "plotly>=6.7.0",
+    "psycopg2-binary>=2.9.12",
+    "pydantic>=2.0",
+    "sqlalchemy>=2.0",
+    "streamlit>=1.57.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["core", "demos"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra --strict-markers"
+
+[dependency-groups]
+dev = [
+    "jupyter>=1.1.1",
+    "nbconvert>=7.17.1",
+    "ucimlrepo>=0.0.7",
+]
